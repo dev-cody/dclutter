@@ -6,11 +6,12 @@ export default class Main extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Testing</h1>
-                <DclutterList dclutter={this.props.dclutter} />
+            <div>   
+                <DclutterList dclutter={this.props.dclutter} className="test"/>
                 <div className="newdclutter-button">
-                    <Link to='/new' className='addnew-button'> New </Link>
+                    <Link to='/new' className='addnew-button' style={{ color: "white" }}>
+                    <i className="fa fa-plus"></i>
+                    </Link>
                 </div>
             </div>
         );

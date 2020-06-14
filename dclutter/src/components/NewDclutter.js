@@ -32,18 +32,21 @@ export default class NewDclutter extends React.Component {
         const { dclutter } = this.state;
 
         return (
-            <div className="dclutter-form">
-                <h1> New dclutter </h1>
-                <form onSubmit={this.handleSave}>
+            <div className="dclutter-form-container">
+                <h3 className="newdclutter-title"> new dclutter </h3>
+                <form className="dclutter-form" onSubmit={this.handleSave}>
                     <div className="form-field">
                         <label>name of item</label>
+                        <br />
                         <input type="text" name="title" value={dclutter.title} onChange={this.updateValue} />
+                        <br />
                         <label>reason to dclutter</label>
+                        <br />
                         <input type="text" name="body" value={dclutter.body} onChange={this.updateValue} />
                     </div>
                     <div className="form-buttons">
-                        <button>save dclutter</button>
-                        <Link to='/'>cacel dclutter</Link>                 
+                        <button className="submit-button">save</button>
+                        <button className="cancel-button"><Link to='/' style={{ color: "white" }}>cancel</Link></button>              
                     </div>
                 </form>
             </div>

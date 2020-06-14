@@ -12,9 +12,8 @@ class App extends Component {
     dclutter: {
       1: {
         _id: 1,
-        title: "Test object",
-        body: "Test body",
-        added: new Date()
+        title: "Test",
+        body: "test",
       }
     }
   }
@@ -42,7 +41,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="main-content">
           <Navbar />
-          <div className="container">
+          <div>
             <Route exact path='/' component={(props) => <Main {...props} dclutter={ this.state.dclutter }/> } />
             <Route exact path='/dclutter/:id' component={(props) => <Show {...props} dclutter={this.state.dclutter[props.match.params.id]} /> } />
             <Route exact path='/new' component={(props) => <NewDclutter {...props} onSave={this.handleSave} /> } />

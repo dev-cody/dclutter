@@ -5,11 +5,16 @@ export default class DclutterList extends React.Component {
     renderDclutter() {
         const dclutter = Object.values(this.props.dclutter);
         
-        return dclutter.map( (d) => <div><h2> <Link to={`/dclutter/${d._id}`}>{ d.title }</Link></h2></div>);
+        return dclutter.map( (d) => 
+            <div className="dclutter-card">
+                <h2> <Link to={`/dclutter/${d._id}`} style={{ color: "white" }}>{ d.title }</Link></h2>
+                <h3>{ d.body }</h3>
+            </div>
+        );
     }
     render() {
         return(
-            <div>
+            <div className="container">
                 { this.renderDclutter() }
             </div>
         );
