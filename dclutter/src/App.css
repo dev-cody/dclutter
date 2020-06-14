@@ -72,8 +72,8 @@ body {
 }
 
 .dclutter-card {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 150px;
   background-color:#355c7d;
   border-radius: 10px;
   display: flex;

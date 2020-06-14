@@ -3,28 +3,28 @@ const express = require('express');
 //Use body-parser
 const bodyParser = require('body-parser');
 //Import models
-const Board = require('../models/board');
+const Dclutter = require('../models/dclutter');
 //Create express router
-const boardRouter = express.Router();
-boardRouter.use(bodyParser.json());
+const dclutterRouter = express.Router();
+dclutterRouter.use(bodyParser.json());
 
-boardRouter.route('/')
+dclutterRouter.route('/')
 .get((req, res, next) => {
-    Board.find()
-    .then(board => {
+    Dclutter.find()
+    .then(dclutter => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(board);
+        res.json(dclutter);
     })
     .catch(err => next(err));
 })
 .post((req, res, next) => {
-    Board.create(req.body)
-    .then(board => {
-        console.log('Created new object on board', board);
+    Dclutter.create(req.body)
+    .then(dclutter => {
+        console.log('Created new object on dclutter', dclutter);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'appliction/json');
-        res.json(board)
+        res.json(dclutter)
     })
     .catch(err => next(err));
 })
@@ -37,13 +37,13 @@ boardRouter.route('/')
     res.end('Delete request not supported here.');
 });
 
-boardRouter.route('/:boardId')
+dclutterRouter.route('/:dclutterId')
 .get((req, res, next) => {
-    Board.findById(req.params.boardId)
-    .then(board => {
+    Dclutter.findById(req.params.dclutterId)
+    .then(dclutter => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(board);
+        res.json(dclutter);
     })
     .catch(err => next(err));
 })
@@ -52,18 +52,18 @@ boardRouter.route('/:boardId')
     res.end('POST request is not supported here.')
 })
 .put((req, res, next) => {
-    Board.findByIdAndUpdate(req.params.boardId, {
+    Dclutter.findByIdAndUpdate(req.params.dclutterId, {
         $set: req.body
     }, { new: true })
-        .then(board => {
+        .then(dclutter => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(board);
+            res.json(dclutter);
         })
         .catch(err => next(err));
 })
 .delete((req, res, next) => {
-    Board.findByIdAndDelete(req.params.boardId)
+    Dclutter.findByIdAndDelete(req.params.dclutterId)
     .then(response => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -73,4 +73,4 @@ boardRouter.route('/:boardId')
 });
 
 //Export the router
-module.exports = boardRouter;
+module.exports = dclutterRouter;

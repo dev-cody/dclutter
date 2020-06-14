@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 //Create the shorthand for schema
 const Schema = mongoose.Schema;
 
-const boardSchema = new Schema({
-    name: {
+const dclutterSchema = new Schema({
+    title: {
         type: String,
         required: true
     },
@@ -12,7 +12,7 @@ const boardSchema = new Schema({
         type: String,
         required: true
     },
-    reason: {
+    body: {
         type: String,
         required: true
     },
@@ -26,6 +26,6 @@ const boardSchema = new Schema({
     timestamps: true
 });
 
-const Board = mongoose.model('Board', boardSchema);
+const Dclutter = mongoose.model('Board', dclutterSchema);
 //Create export
-module.exports = Board;
+module.exports = Dclutter;
