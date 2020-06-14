@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+/***********************************
+*                                  *
+*     Designed and Developed by    *
+*     Cody Koscielski              *
+*                                  *
+*     Table of Contents            *
+*     1. Main Styles               *
+*     2. Class Styles              *
+*     3. ID Styles                 *
+*     4. Project Cards             *
+*     5. Media queries             *
+*                                  *
+***********************************/
+
+/**********************************
+Color Hex:
+Darkish blue: #02244a
+Darkish Orange: #df622c
+Medium blue: #55bdca
+Light Blue: #c7eef5
+Shinny Blue accent: #95ffff
+
+**********************************/
+
+/******** 1. Main Styles **********/
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/******** 2. Class Styles **********/
+
+.addnew-button {
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10%;
+  margin-bottom: 10%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.button-container {
+  margin-right: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo { 
+  height: 50px;
+  margin-top: 5px;
+}
+
+.logo-container {
+  margin-left: 20px;
+}
+
+.main-nav {
+  width: 100%;
+  height: 70px;
+  background-color: #f67280;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.nav-button {
+  border: none;
+  width: 65px;
+  margin: 1%;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #355c7d;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-weight: bold;
+  outline: none;
 }
