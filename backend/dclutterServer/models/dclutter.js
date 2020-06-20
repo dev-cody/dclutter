@@ -15,12 +15,6 @@ const dclutterSchema = new Schema({
     body: {
         type: String,
         required: true
-    },
-    timeFrame: {
-        type: Number,
-        required: true,
-        min: 14,
-        max: 90
     }
 }, {
     timestamps: true
