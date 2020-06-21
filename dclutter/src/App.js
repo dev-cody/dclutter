@@ -12,8 +12,8 @@ class App extends Component {
     dclutter: {
       1: {
         _id: 1,
-        title: "Test",
-        body: "test",
+        title: "Shoes",
+        body: "These are old and I no longer wear them",
       }
     }
   }

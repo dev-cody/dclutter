@@ -72,8 +72,8 @@ body {
 }
 
 .dclutter-card {
-  width: 125px;
-  height: 150px;
+  width: 200px;
+  height: 250px;
   background-color:#355c7d;
   border-radius: 10px;
   display: flex;
@@ -95,6 +95,15 @@ body {
 .dclutter-form-container {
   margin-left: 10%;
   margin-right: 10%;
+  text-align: center;
+}
+
+.dclutter-title {
+  font-size: 1.5rem;
+}
+
+.dclutter-body {
+  font-size: 1rem;
 }
 
 .fa {
@@ -140,11 +149,26 @@ body {
   outline: none;
 }
 
+.showcard {
+  text-align: center;
+  width: 80%;
+  height: 95%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  background-color: #355c7d;
+  color: white;
+  border-radius: 10px;
+}
+
 .show-container {
+  margin-top: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 50vh;
 }
 
 .submit-button {
@@ -155,4 +179,12 @@ body {
   border: none;
   border-radius: 5px;
   color: white;
+}
+
+.test-image {
+  height: 150px;
+}
+
+#img {
+  border: none;
 }

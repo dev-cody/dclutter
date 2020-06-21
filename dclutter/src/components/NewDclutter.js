@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 export default class NewDclutter extends React.Component {
 
     state = {
         dclutter: {
             title: '',
             body: '',
-            created: undefined,
-            updated: undefined
         }
     }
 
@@ -23,6 +21,14 @@ export default class NewDclutter extends React.Component {
     handleSave = (e) => {
         e.preventDefault();
 
+        axios.post('https://localhost:3443/dclutter', this.state)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        
         const id = this.props.onSave(this.state.dclutter);
         this.props.history.replace(`/dclutter/${ id }`);
     }
@@ -43,6 +49,10 @@ export default class NewDclutter extends React.Component {
                         <label>reason to dclutter</label>
                         <br />
                         <input type="text" name="body" value={dclutter.body} onChange={this.updateValue} />
+                        <br />
+                        <label htmlFor="img">select image</label>
+                        <br />
+                        <input type="file" name="img" accept="image/*" id="img" />
                     </div>
                     <div className="form-buttons">
                         <button className="submit-button">save</button>
