@@ -4,6 +4,7 @@ import Navbar from './components/NavbarComponent';
 import Main from './components/MainComponents';
 import Show from './components/ShowComponent';
 import NewDclutter from './components/NewDclutter';
+import { baseUrl } from './baseUrl';
 import './App.css';
 
 class App extends Component {
@@ -35,6 +36,13 @@ class App extends Component {
     return id;
   }
   
+  componentDidMount() {
+    fetch(baseUrl)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((err) => new Error(err));
+  }
 
   render() {
     return(
@@ -42,7 +50,7 @@ class App extends Component {
         <div className="main-content">
           <Navbar />
           <div>
-            <Route exact path='/' component={(props) => <Main {...props} dclutter={ this.state.dclutter }/> } />
+            <Route exact path='/dclutter' component={(props) => <Main {...props} dclutter={ this.state.dclutter }/> } />
             <Route exact path='/dclutter/:id' component={(props) => <Show {...props} dclutter={this.state.dclutter[props.match.params.id]} /> } />
             <Route exact path='/new' component={(props) => <NewDclutter {...props} onSave={this.handleSave} /> } />
           </div>

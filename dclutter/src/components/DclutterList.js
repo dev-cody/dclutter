@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import shoes from '../images/vans.jpg';
+
 export default class DclutterList extends React.Component {
 
+    
     renderDclutter() {
         const dclutter = Object.values(this.props.dclutter);
         
@@ -14,6 +16,7 @@ export default class DclutterList extends React.Component {
             </div>
         );
     }
+
     render() {
         return(
             <div className="container">

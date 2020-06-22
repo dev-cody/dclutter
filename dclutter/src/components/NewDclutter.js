@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { baseUrl } from '../baseUrl';
 export default class NewDclutter extends React.Component {
 
     state = {
         dclutter: {
             title: '',
             body: '',
+            img: ''
         }
     }
 
@@ -19,18 +20,20 @@ export default class NewDclutter extends React.Component {
     }
 
     handleSave = (e) => {
+
         e.preventDefault();
 
-        axios.post('https://localhost:3443/dclutter', this.state)
-        .then(response => {
-            console.log(response);
+        fetch(baseUrl+'dclutter', {
+            method:'POST',
+            body: JSON.stringify(this.state.dclutter),
+            headers: {
+                'Content-Type': 'appliction/json'
+            }
         })
-        .catch(error => {
-            console.log(error);
+        .then((response) => {
+            console.log(response)
         })
-        
-        const id = this.props.onSave(this.state.dclutter);
-        this.props.history.replace(`/dclutter/${ id }`);
+        .catch((err) => new Error(err))
     }
 
 
@@ -52,7 +55,7 @@ export default class NewDclutter extends React.Component {
                         <br />
                         <label htmlFor="img">select image</label>
                         <br />
-                        <input type="file" name="img" accept="image/*" id="img" />
+                        <input type="file" name="img" accept="image/*" id="img" value={dclutter.img} onChange={this.updateValue} />
                     </div>
                     <div className="form-buttons">
                         <button className="submit-button">save</button>

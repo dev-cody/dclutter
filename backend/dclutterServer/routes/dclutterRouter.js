@@ -4,12 +4,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //Import models
 const Dclutter = require('../models/dclutter');
+//Import cors
+const cors = require('./cors');
 //Create express router
 const dclutterRouter = express.Router();
 dclutterRouter.use(bodyParser.json());
 
 dclutterRouter.route('/')
-.get((req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+.get(cors.cors, (req, res, next) => {
     Dclutter.find()
     .then(dclutter => {
         res.statusCode = 200;
@@ -18,7 +21,7 @@ dclutterRouter.route('/')
     })
     .catch(err => next(err));
 })
-.post((req, res, next) => {
+.post(cors.corsWithOptions, (req, res, next) => {
     Dclutter.create(req.body)
     .then(dclutter => {
         console.log('Created new object on dclutter', dclutter);
@@ -28,17 +31,18 @@ dclutterRouter.route('/')
     })
     .catch(err => next(err));
 })
-.put((req, res) => {
+.put(cors.corsWithOptions, (req, res) => {
     res.statusCode = 403;
     res.end('PUT request not supported');
 })
-.delete((req, res) => {
+.delete(cors.corsWithOptions, (req, res) => {
     res.statusCode = 403;
     res.end('Delete request not supported here.');
 });
 
 dclutterRouter.route('/:dclutterId')
-.get((req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+.get(cors.cors, (req, res, next) => {
     Dclutter.findById(req.params.dclutterId)
     .then(dclutter => {
         res.statusCode = 200;
@@ -47,11 +51,11 @@ dclutterRouter.route('/:dclutterId')
     })
     .catch(err => next(err));
 })
-.post((req,res) => {
+.post(cors.corsWithOptions, (req,res) => {
     res.statusCode = 403;
     res.end('POST request is not supported here.')
 })
-.put((req, res, next) => {
+.put(cors.corsWithOptions, (req, res, next) => {
     Dclutter.findByIdAndUpdate(req.params.dclutterId, {
         $set: req.body
     }, { new: true })
@@ -62,7 +66,7 @@ dclutterRouter.route('/:dclutterId')
         })
         .catch(err => next(err));
 })
-.delete((req, res, next) => {
+.delete(cors.corsWithOptions, (req, res, next) => {
     Dclutter.findByIdAndDelete(req.params.dclutterId)
     .then(response => {
         res.statusCode = 200;
