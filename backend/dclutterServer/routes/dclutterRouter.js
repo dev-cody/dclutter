@@ -11,8 +11,7 @@ const dclutterRouter = express.Router();
 dclutterRouter.use(bodyParser.json());
 
 dclutterRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+.get((req, res, next) => {
     Dclutter.find()
     .then(dclutter => {
         res.statusCode = 200;
@@ -20,60 +19,47 @@ dclutterRouter.route('/')
         res.json(dclutter);
     })
     .catch(err => next(err));
-})
-.post(cors.corsWithOptions, (req, res, next) => {
-    Dclutter.create(req.body)
-    .then(dclutter => {
-        console.log('Created new object on dclutter', dclutter);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'appliction/json');
-        res.json(dclutter)
-    })
-    .catch(err => next(err));
-})
-.put(cors.corsWithOptions, (req, res) => {
-    res.statusCode = 403;
-    res.end('PUT request not supported');
-})
-.delete(cors.corsWithOptions, (req, res) => {
-    res.statusCode = 403;
-    res.end('Delete request not supported here.');
 });
 
-dclutterRouter.route('/:dclutterId')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
-    Dclutter.findById(req.params.dclutterId)
+dclutterRouter.route('/new')
+.post((req, res) => {
+    const title = req.body.title;
+    const body = req.body.body;
+
+    const newDclutter = new Dclutter({
+        title,
+        body
+    });
+
+    newDclutter.save()
+    .then(() => res.json('New Dclutter item added to your list'))
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+dclutterRouter.route('/:id').get((req, res) => {
+    Dclutter.findById(req.params.id)
+    .then( dclutter => res.json(dclutter))
+    .catch( err => res.status(400).json('Error' + err))
+});
+
+dclutterRouter.route('/:id').delete((req, res) => {
+    Dclutter.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Dclutter deleted from your list'))
+    .catch( err => res.status(400).json('Error' + err))
+});
+
+dclutterRouter.route('/:id').post((req, res) => {
+    Dclutter.findById(req.params.id)
     .then(dclutter => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(dclutter);
+        dclutter.title = req.body.title;
+        dclutter.body = req.body.body;
+
+        dclutter.save()
+        .then(() => res.json('You updated your Dclutter listing!'))
+        .catch( err => res.status(400).json('Error' + err))
     })
-    .catch(err => next(err));
-})
-.post(cors.corsWithOptions, (req,res) => {
-    res.statusCode = 403;
-    res.end('POST request is not supported here.')
-})
-.put(cors.corsWithOptions, (req, res, next) => {
-    Dclutter.findByIdAndUpdate(req.params.dclutterId, {
-        $set: req.body
-    }, { new: true })
-        .then(dclutter => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(dclutter);
-        })
-        .catch(err => next(err));
-})
-.delete(cors.corsWithOptions, (req, res, next) => {
-    Dclutter.findByIdAndDelete(req.params.dclutterId)
-    .then(response => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(response);
-    })
-    .catch(err => next(err))
+    .catch( err => res.status(400).json('Error' + err))
 });
 
 //Export the router

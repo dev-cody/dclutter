@@ -35,9 +35,6 @@ body {
 .addnew-button {
   border: none;
   border-radius: 50%;
-  position: absolute;
-  bottom: 0;
-  right: 0;
   margin-right: 10%;
   margin-bottom: 10%;
   background-color: #f67280;

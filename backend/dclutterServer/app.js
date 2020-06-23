@@ -7,12 +7,15 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const cors = require('cors');
+
 //import my routers
 const dclutterRouter = require('./routes/dclutterRouter');
+const newRouter = require('./routes/newRouter');
 
 //Connect to the mongoDB database
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/nucampsite';
+const url = 'mongodb://localhost:27017/Dclutter';
 const connect = mongoose.connect(url, {
   useCreateIndex: true,
   useFindAndModify: false,
@@ -35,6 +38,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -1,64 +1,66 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
-export default class NewDclutter extends React.Component {
+//Use Axios
+import axios from 'axios';
 
-    state = {
-        dclutter: {
+export default class NewDclutter extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
             title: '',
-            body: '',
-            img: ''
+            body: ''
         }
+
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeBody = this.onChangeBody.bind(this);
     }
 
-    updateValue = (e) => {
-        const { dclutter } = this.state;
-
+    onChangeTitle(e) {
         this.setState({
-            dclutter: {...dclutter, [e.target.name]: e.target.value}
+            title: e.target.value
         });
     }
 
-    handleSave = (e) => {
-
-        e.preventDefault();
-
-        fetch(baseUrl+'dclutter', {
-            method:'POST',
-            body: JSON.stringify(this.state.dclutter),
-            headers: {
-                'Content-Type': 'appliction/json'
-            }
+    onChangeBody(e) {
+        this.setState({
+            body: e.target.value
         })
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((err) => new Error(err))
     }
 
+    onSubmit(e) {
+        e.preventDefault();
+        console.log('test');
+        const dclutter = {
+            title: this.state.title,
+            body: this.state.body
+        }
+
+        console.log(dclutter);
+
+        axios.post(baseUrl+'dclutter/new', dclutter)
+    .then(res => console.log(res.data));
+
+    window.location = '/';
+    }
 
     render(){
-        const { dclutter } = this.state;
-
         return (
             <div className="dclutter-form-container">
                 <h3 className="newdclutter-title"> new dclutter </h3>
-                <form className="dclutter-form" onSubmit={this.handleSave}>
+                <form className="dclutter-form" onSubmit={this.onSubmit}>
                     <div className="form-field">
                         <label>name of item</label>
                         <br />
-                        <input type="text" name="title" value={dclutter.title} onChange={this.updateValue} />
-                        <br />
+                        <input type="text" name="title" value={this.state.title} onChange={this.onChangeTitle} />
                         <label>reason to dclutter</label>
                         <br />
-                        <input type="text" name="body" value={dclutter.body} onChange={this.updateValue} />
-                        <br />
-                        <label htmlFor="img">select image</label>
-                        <br />
-                        <input type="file" name="img" accept="image/*" id="img" value={dclutter.img} onChange={this.updateValue} />
+                        <input type="text" name="body" value={this.state.body} onChange={this.onChangeBody} />
                     </div>
                     <div className="form-buttons">
-                        <button className="submit-button">save</button>
+                        <button type="submit" className="submit-button">save</button>
                         <button className="cancel-button"><Link to='/' style={{ color: "white" }}>cancel</Link></button>              
                     </div>
                 </form>

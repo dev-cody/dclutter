@@ -38,7 +38,7 @@ class Navbar extends Component {
             <Link to='/'><img src={ logo } className="logo" alt="dclutter logl" /> </Link>
           </div>
           <div className="button-container">
-            <button className="nav-button" onClick={this.toggleModal}>Login</button>
+            <Link to='/new' className='addnew-button' style={{ color: "white" }}><i className="fa fa-plus"></i></Link>
           </div>
         </nav>
 

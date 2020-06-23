@@ -1,26 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import shoes from '../images/vans.jpg';
+import React, { Component } from 'react';
+import { baseUrl } from '../baseUrl';
+//Use Axios
+import axios from 'axios'
 
-export default class DclutterList extends React.Component {
+const Dclutter = props => (
+    <tr>
+        <td> {props.dclutter.title}</td>
+        <td>{props.dclutter.body}</td>
+    </tr>
+)
 
+export default class DclutterList extends Component {
     
-    renderDclutter() {
-        const dclutter = Object.values(this.props.dclutter);
-        
-        return dclutter.map( (d) => 
-            <div className="dclutter-card">
-                <h2 className="dclutter-title" ><Link to={`/dclutter/${d._id}`} style={{ color: "white" }}>{ d.title }</Link></h2>
-                <h3 className="dclutter-body">{ d.body }</h3>
-                <img src={ shoes } className="test-image" alt="dclutter logl" />
-            </div>
-        );
+    constructor(props){
+        super(props);
+
+        this.deleteDclutter = this.deleteDclutter.bind(this);
+
+        this.state = {dclutter: []}
+    }
+
+    componentWillMount() {
+        axios.get(baseUrl+'dclutter/')
+        .then(response => {
+            this.setState({ dclutter: response.data})
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    deleteDclutter(id) {
+        axios.delete(baseUrl+'dclutter/'+id)
+        .then(response => {console.log(response.data)});
+
+        this.setState({
+            dclutter: this.state.dclutter.filter( el => el._id !== id)
+        })
+    }
+
+    dclutterList() {
+        return (
+            this.state.dclutter.map(currentdclutter => {
+                return <Dclutter dclutter={currentdclutter} deleteDclutter={this.deleteDclutter} key={currentdclutter._id} />
+            })
+        )
     }
 
     render() {
         return(
-            <div className="container">
-                { this.renderDclutter() }
+            <div>
+                <h3> Your Dclutter List </h3>
+                <p> { this.dclutterList }</p>
             </div>
         );
     }
