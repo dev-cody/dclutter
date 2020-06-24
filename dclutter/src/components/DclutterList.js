@@ -4,10 +4,10 @@ import { baseUrl } from '../baseUrl';
 import axios from 'axios'
 
 const Dclutter = props => (
-    <tr>
-        <td> {props.dclutter.title}</td>
-        <td>{props.dclutter.body}</td>
-    </tr>
+    <div className="dclutter-card">
+        <h3> {props.dclutter.title} </h3>
+        <h4> {props.dclutter.body}</h4>
+    </div>
 )
 
 export default class DclutterList extends Component {
@@ -51,7 +51,7 @@ export default class DclutterList extends Component {
         return(
             <div>
                 <h3> Your Dclutter List </h3>
-                <p> { this.dclutterList }</p>
+                <div> { this.dclutterList() }</div>
             </div>
         );
     }

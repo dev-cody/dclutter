@@ -4,8 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //Import models
 const Dclutter = require('../models/dclutter');
-//Import cors
-const cors = require('./cors');
 //Create express router
 const dclutterRouter = express.Router();
 dclutterRouter.use(bodyParser.json());

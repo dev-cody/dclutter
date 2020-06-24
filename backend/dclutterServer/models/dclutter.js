@@ -16,6 +16,6 @@ const dclutterSchema = new Schema({
     timestamps: true
 });
 
-const Dclutter = mongoose.model('Board', dclutterSchema);
+const Dclutter = mongoose.model('dclutter', dclutterSchema);
 //Create export
 module.exports = Dclutter;

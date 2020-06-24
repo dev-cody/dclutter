@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../images/dclutter_logo.png';
 
 //Reactstrap imports
@@ -38,7 +38,7 @@ class Navbar extends Component {
             <Link to='/'><img src={ logo } className="logo" alt="dclutter logl" /> </Link>
           </div>
           <div className="button-container">
-            <Link to='/new' className='addnew-button' style={{ color: "white" }}><i className="fa fa-plus"></i></Link>
+            <NavLink to='/new' className='addnew-button' style={{ color: "white" }}><i className="fa fa-plus"></i></NavLink>
           </div>
         </nav>
 

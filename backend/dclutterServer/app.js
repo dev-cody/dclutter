@@ -9,25 +9,25 @@ var usersRouter = require('./routes/users');
 
 const cors = require('cors');
 
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
 //import my routers
 const dclutterRouter = require('./routes/dclutterRouter');
-const newRouter = require('./routes/newRouter');
 
 //Connect to the mongoDB database
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/Dclutter';
-const connect = mongoose.connect(url, {
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+//const url = 'mongodb://localhost:27017/dclutter';
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+const connection = mongoose.connection;
 //Err handling if connected or not connected to the server
-connect.then(() => console.log('Connected correctly to the server'),
-  err => console.log(err)
-);
+connection.once('open', () => {
+  console.log('MongoDB Database connected!');
+})
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

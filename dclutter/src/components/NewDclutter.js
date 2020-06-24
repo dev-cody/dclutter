@@ -16,6 +16,7 @@ export default class NewDclutter extends Component {
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeBody = this.onChangeBody.bind(this);
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     onChangeTitle(e) {
@@ -55,6 +56,7 @@ export default class NewDclutter extends Component {
                         <label>name of item</label>
                         <br />
                         <input type="text" name="title" value={this.state.title} onChange={this.onChangeTitle} />
+                        <br />
                         <label>reason to dclutter</label>
                         <br />
                         <input type="text" name="body" value={this.state.body} onChange={this.onChangeBody} />
