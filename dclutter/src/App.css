@@ -49,10 +49,10 @@ body {
   margin-right: 20px;
 }
 
-.container {
+.main-container {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   text-align: center;
   flex-direction: row;
@@ -111,6 +111,16 @@ body {
   font-size: 1rem;
 }
 
+.delete-button {
+  height: 40px;
+  width: 65px;
+  text-align: center;
+  background-color: #f67280;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
 .fa {
   color: white;
   text-shadow: 3px 3px rgba(0,0,0,.3);
@@ -120,8 +130,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
-  margin-top: 5%;
+  margin: 5%;
+  width: 100%;
 }
 
 .logo { 

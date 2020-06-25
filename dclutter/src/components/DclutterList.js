@@ -7,6 +7,7 @@ const Dclutter = props => (
     <div className="dclutter-card">
         <h3> {props.dclutter.title} </h3>
         <h4> {props.dclutter.body}</h4>
+        <button onClick={() => {props.deleteDclutter(props.dclutter._id) }} className="delete-button">dclutter</button>  
     </div>
 )
 
@@ -50,7 +51,7 @@ export default class DclutterList extends Component {
     render() {
         return(
             <div>
-                <h3> Your Dclutter List </h3>
+                <h3> your dclutter list </h3>
                 <div> { this.dclutterList() }</div>
             </div>
         );

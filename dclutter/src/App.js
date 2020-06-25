@@ -9,7 +9,7 @@ function App() {
   return(
     <Router>
       <Navbar />
-      <div className="container">
+      <div className="main-container">
         <Route path='/' component={DclutterList}/>
         <Route exact path='/new' component={NewDclutter} />
         <Redirect to='/' />

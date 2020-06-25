@@ -11,11 +11,13 @@ export default class NewDclutter extends Component {
 
         this.state = {
             title: '',
-            body: ''
+            body: '',
+            img: ''
         }
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeBody = this.onChangeBody.bind(this);
+        this.onChangeImg = this.onChangeImg.bind(this);
         this.onSubmit = this.onSubmit.bind(this)
     }
 
@@ -31,27 +33,34 @@ export default class NewDclutter extends Component {
         })
     }
 
+    onChangeImg(e) {
+        this.setState({
+            img: e.target.value
+        })
+    }
+
     onSubmit(e) {
         e.preventDefault();
         console.log('test');
         const dclutter = {
             title: this.state.title,
-            body: this.state.body
+            body: this.state.body,
+            img: this.state.img
         }
 
         console.log(dclutter);
 
         axios.post(baseUrl+'dclutter/new', dclutter)
-    .then(res => console.log(res.data));
+        .then(res => console.log(res.data));
 
-    window.location = '/';
+        window.location = '/';
     }
 
     render(){
         return (
             <div className="dclutter-form-container">
                 <h3 className="newdclutter-title"> new dclutter </h3>
-                <form className="dclutter-form" onSubmit={this.onSubmit}>
+                <form className="dclutter-form" action="/update" encType="multipart/form-data" onSubmit={this.onSubmit}>
                     <div className="form-field">
                         <label>name of item</label>
                         <br />

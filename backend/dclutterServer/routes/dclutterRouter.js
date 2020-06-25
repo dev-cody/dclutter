@@ -52,6 +52,7 @@ dclutterRouter.route('/:id').post((req, res) => {
     .then(dclutter => {
         dclutter.title = req.body.title;
         dclutter.body = req.body.body;
+        dclutter.img = req.body.img;
 
         dclutter.save()
         .then(() => res.json('You updated your Dclutter listing!'))
